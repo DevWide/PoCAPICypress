@@ -28,6 +28,10 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
 
+      # Adicionar PNPM ao PATH (caso necessário)
+      - name: Ensure pnpm is available
+        run: export PATH="$(npm bin -g):$PATH"
+
       # Verificar versão do PNPM
       - name: Verify pnpm version
         run: pnpm --version
@@ -49,3 +53,4 @@ jobs:
           path: |
             cypress/videos/
             cypress/screenshots/
+
