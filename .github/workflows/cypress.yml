@@ -21,12 +21,16 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18 # Versão compatível com PNPM
+          node-version: 18
           cache: 'pnpm'
 
-      # Instalar o PNPM manualmente
+      # Instalar o PNPM de forma explícita
       - name: Install pnpm
-        run: corepack enable # Corepack vem com Node.js para gerenciar pnpm
+        run: |
+          npm install -g pnpm
+          pnpm setup
+        env:
+          COREPACK_ENABLE: "1"
 
       # Verificar versão do PNPM
       - name: Verify pnpm version
@@ -49,5 +53,6 @@ jobs:
           path: |
             cypress/videos/
             cypress/screenshots/
+
 
 
