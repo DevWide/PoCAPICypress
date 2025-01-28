@@ -17,22 +17,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Configurar o Node.js com suporte ao PNPM
+      # Configurar o Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: 'pnpm'
 
-      # Instalar o PNPM de forma explícita
+      # Instalar PNPM de forma explícita e vinculá-lo ao PATH
       - name: Install pnpm
         run: |
-          npm install -g pnpm
-          pnpm setup
-        env:
-          COREPACK_ENABLE: "1"
+          corepack enable
+          corepack prepare pnpm@latest --activate
 
-      # Verificar versão do PNPM
+      # Verificar versão do PNPM para garantir a instalação
       - name: Verify pnpm version
         run: pnpm --version
 
@@ -53,6 +51,5 @@ jobs:
           path: |
             cypress/videos/
             cypress/screenshots/
-
 
 
