@@ -24,13 +24,13 @@ jobs:
           node-version: 18
           cache: 'pnpm'
 
-      # Instalar PNPM de forma explícita e vinculá-lo ao PATH
+      # Instalar o pnpm manualmente e adicioná-lo ao PATH
       - name: Install pnpm
         run: |
-          corepack enable
-          corepack prepare pnpm@latest --activate
+          npm install -g pnpm
+          echo "::add-path::$(npm bin -g)" # Adiciona o binário do pnpm ao PATH
 
-      # Verificar versão do PNPM para garantir a instalação
+      # Verificar a versão do pnpm
       - name: Verify pnpm version
         run: pnpm --version
 
@@ -51,5 +51,6 @@ jobs:
           path: |
             cypress/videos/
             cypress/screenshots/
+
 
 
