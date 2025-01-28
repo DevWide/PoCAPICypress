@@ -21,20 +21,20 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 18 # Versão do Node.js compatível com PNPM
           cache: 'pnpm'
 
-      # Instalar o pnpm manualmente e adicioná-lo ao PATH
-      - name: Install pnpm
+      # Instalar e ativar o PNPM
+      - name: Install and Activate pnpm
         run: |
-          npm install -g pnpm
-          echo "::add-path::$(npm bin -g)" # Adiciona o binário do pnpm ao PATH
+          corepack enable
+          corepack prepare pnpm@latest --activate
 
-      # Verificar a versão do pnpm
+      # Verificar versão do PNPM
       - name: Verify pnpm version
         run: pnpm --version
 
-      # Instalar dependências
+      # Instalar dependências com PNPM
       - name: Install dependencies
         run: pnpm install
 
@@ -51,6 +51,3 @@ jobs:
           path: |
             cypress/videos/
             cypress/screenshots/
-
-
-
