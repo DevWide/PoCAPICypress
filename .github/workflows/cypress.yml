@@ -1,0 +1,51 @@
+name: Run Cypress Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout do código
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Configurar o Node.js com suporte ao PNPM
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18 # Versão compatível com PNPM
+          cache: 'pnpm'
+
+      # Instalar PNPM
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      # Verificar versão do PNPM
+      - name: Verify pnpm version
+        run: pnpm --version
+
+      # Instalar dependências
+      - name: Install dependencies
+        run: pnpm install
+
+      # Executar os testes no modo headless usando script do package.json
+      - name: Run Cypress Tests
+        run: pnpm test:chrome
+
+      # Salvar artefatos (vídeos e capturas de tela)
+      - name: Upload Cypress artifacts
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-artifacts
+          path: |
+            cypress/videos/
+            cypress/screenshots/

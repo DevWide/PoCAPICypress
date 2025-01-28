@@ -1,0 +1,17 @@
+# Node.js
+node_modules/
+pnpm-lock.yaml
+
+# Cypress
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/
+
+# Logs e caches
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+.cache/
+
+# Configurações locais
+.env

@@ -1,0 +1,18 @@
+{
+  "validUser": {
+    "nome": "Usuário Válido",
+    "email": "valido@email.com",
+    "password": "senha123",
+    "administrador": "true"
+  },
+  "invalidUser": {
+    "email": "invalido@email.com",
+    "password": "senha_errada"
+  },
+  "newUser": {
+    "nome": "Novo Usuário",
+    "email": "novo_usuario@email.com",
+    "password": "novaSenha123",
+    "administrador": "false"
+  }
+}

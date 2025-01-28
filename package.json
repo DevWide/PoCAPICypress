@@ -1,0 +1,19 @@
+{
+  "name": "ProjetoTec2CloudAPI",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "pnpm exec cypress run",
+    "test:headless": "pnpm exec cypress run --headless",
+    "test:chrome": "pnpm exec cypress run --browser chrome --headless",
+    "test:open": "pnpm exec cypress open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "^9.4.0",
+    "cypress": "^14.0.0"
+  }
+}
