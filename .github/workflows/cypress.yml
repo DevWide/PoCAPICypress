@@ -1,4 +1,4 @@
-name: Run Cypress Tests
+name: API Cypress Tests
 
 on:
   push:
@@ -13,36 +13,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout do código
+      # Checkout do código do repositório
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Configurar o Node.js
+      # Configuração do Node.js (versão compatível com pnpm)
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18 # Versão do Node.js compatível com PNPM
-          cache: 'pnpm'
+          node-version: 18 # Versão compatível com pnpm
 
-      # Instalar e ativar o PNPM
-      - name: Install and Activate pnpm
-        run: |
-          corepack enable
-          corepack prepare pnpm@latest --activate
+      # Instalar o pnpm
+      - name: Install pnpm
+        run: npm install -g pnpm
 
-      # Verificar versão do PNPM
+      # Verificar instalação do pnpm
       - name: Verify pnpm version
         run: pnpm --version
 
-      # Instalar dependências com PNPM
+      # Instalar dependências
       - name: Install dependencies
         run: pnpm install
 
       # Executar os testes no modo headless
-      - name: Run Cypress Tests
+      - name: Run Cypress tests
         run: pnpm exec cypress run --browser chrome --headless
 
-      # Salvar artefatos (vídeos e capturas de tela)
+      # Salvar artefatos (vídeos e screenshots)
       - name: Upload Cypress artifacts
         if: always()
         uses: actions/upload-artifact@v3
